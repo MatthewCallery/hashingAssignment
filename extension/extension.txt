@@ -1,0 +1,36 @@
+Hashing Assignment - Extension:
+
+For the extension, I have used a binary search tree approach to deal
+with collisions rather than separate chaining. Collisions are dealt
+with by forming a tree out of the base array.
+
+If a tree is formed, the left-hand tree of a parent contains all keys
+less than the parent node - in this instance that means the left-hand
+tree contains words which come alphabetically before the parent.
+
+The same hash function is used as in part 1 and part 2.
+
+For both this extension and part 2, the calculation which decides whether
+to resize the array has been calculated as follows:
+
+if((num_chained / num_words) > MAX_OCCUPANCY){
+   /* Resize array and rehash */
+}
+
+where MAX_OCCUPANCY is a defined ratio, num_chained is the number of words
+which are not in the base array, and num_words is the total number of words
+which have been hashed.
+
+MAX_OCCUPANCY is set as 0.5 for both files submitted - this ratio was chosen
+as it provided a balance between giving a low average lookup and avoiding an
+unnecessarily large base array.
+
+After testing on multiple word files, it would appear that the binary tree
+approach provides a lower average lookup than separate chaining. This is as
+expected.
+
+Specifically, for eowl_shuffle.txt, the binary tree approach gives an average
+lookup of 1.407 vs 1.448 for separate chaining. This trend remains constant if
+MAX_OCCUPANCY is varied in the range 0.1 - 1.0.
+
+
